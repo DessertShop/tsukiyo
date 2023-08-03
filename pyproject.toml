@@ -2,7 +2,7 @@
 name = "no-named-yet"
 version = "0.1.0"
 description = ""
-authors = ["faker2048 <nspyia2002@gmail.com>", "Doun <imdounx@gmail.com>"]
+authors = ["faker2048 <nspyia2002@gmail.com>", "Dounx <imdounx@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "no_named_yet"}]
