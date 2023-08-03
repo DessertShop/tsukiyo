@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/google/pyink
-    rev: 23.3.0
+    rev: 23.5.0
     hooks:
       - id: pyink
         # It is recommended to specify the latest version of Python
