@@ -17,6 +17,9 @@ tsukiyo = 'src.main:main'
 pyink = "^23.5.0"
 pre-commit = "^3.3.3"
 
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
