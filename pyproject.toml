@@ -5,7 +5,7 @@ description = ""
 authors = ["faker2048 <nspyia2002@gmail.com>", "Dounx <imdounx@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "tsukiyo"}]
+packages = [{ include = "src", from = "." }]
 
 [tool.poetry.dependencies]
 python = "^3.10.12"
