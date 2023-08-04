@@ -12,6 +12,9 @@ python = "^3.10.12"
 pyink = "^23.5.0"
 pre-commit = "^3.3.3"
 
+[tool.poetry.scripts]
+tsukiyo = 'src.main:main'
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
