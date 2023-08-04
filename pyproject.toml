@@ -1,14 +1,14 @@
 [tool.poetry]
-name = "no-named-yet"
+name = "tsukiyo"
 version = "0.1.0"
 description = ""
 authors = ["faker2048 <nspyia2002@gmail.com>", "Dounx <imdounx@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "no_named_yet"}]
+packages = [{include = "tsukiyo"}]
 
 [tool.poetry.dependencies]
-python = "3.10"
+python = "^3.10.12"
 pyink = "^23.5.0"
 pre-commit = "^3.3.3"
 
