@@ -12,6 +12,7 @@ python = "^3.10"
 loguru = "^0.7.0"
 fastapi = "^0.101.0"
 loguru = "^0.7.0"
+fastapi = "^0.101.0"
 
 [tool.poetry.scripts]
 tsukiyo = 'src.main:main'
