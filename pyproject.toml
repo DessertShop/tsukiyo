@@ -8,7 +8,7 @@ readme = "README.md"
 packages = [{ include = "src", from = "." }]
 
 [tool.poetry.dependencies]
-python = "^3.10.12"
+python = "^3.10"
 
 [tool.poetry.scripts]
 tsukiyo = 'src.main:main'
