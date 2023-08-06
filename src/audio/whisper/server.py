@@ -15,7 +15,7 @@ class TranscriptionService:
     def __init__(self) -> None:
         self.model = WhisperModel(
             model_size_or_path="tiny",
-            device="cpu",
+            device="auto",
             download_root=None,  # 暂时设置为None, 模型会下载到 ~/.cache/huggingface...
         )
 
