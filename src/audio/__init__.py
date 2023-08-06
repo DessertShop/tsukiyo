@@ -7,7 +7,7 @@ class AudioConstants:
 # 音频帧类
 class AudioFrame:
 
-    def __init__(self, data: bytes):
+    def __init__(self, data: bytes) -> None:
         self.data = data
         self.duration_seconds = len(data) / (
             AudioConstants.SAMPLE_RATE * AudioConstants.BIT / 8

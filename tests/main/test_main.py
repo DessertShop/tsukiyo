@@ -4,7 +4,8 @@ from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 from loguru import logger
-
+from src.audio.whisper.transcribe import TranscriptionResult
+from faster_whisper.transcribe import TranscriptionInfo
 from src.main import app
 
 
@@ -30,8 +31,11 @@ def test_audio_endpoint():
 
     class MockTranscriptionService:
 
-        def transcribe(self, context):
-            return "Test transcription Text"
+        class MockSegment:
+            text = "Test transcription Text"
+
+        def transcribe_context(self, context):
+            return TranscriptionResult([self.MockSegment()], None)
 
     with patch(
         "src.audio.whisper.server.TranscriptionService"
