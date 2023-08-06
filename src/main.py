@@ -1,55 +1,12 @@
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Depends
+from fastapi import Depends, FastAPI, WebSocket, WebSocketDisconnect
 from loguru import logger
-from typing import List
-from src.audio.whisper.transcribe import transcribe_full
+
+from src.audio import AudioFrame
+from src.audio.whisper.server import TranscriptionService, get_transcription_service
+from src.audio.whisper.transcribe import TranscriptionContext
 
 # 创建应用实例
 app = FastAPI()
-
-
-# 音频配置类
-class AudioConstants:
-    SAMPLE_RATE = 16000
-    BIT = 16
-
-
-# 音频帧类
-class AudioFrame:
-
-    def __init__(self, data: bytes):
-        self.data = data
-        self.duration_seconds = len(data) / (
-            AudioConstants.SAMPLE_RATE * AudioConstants.BIT / 8
-        )
-
-
-# 转录上下文类
-class TranscriptionContext:
-
-    def __init__(self):
-        self.frames: List[AudioFrame] = []
-
-    def add_frame(self, frame: AudioFrame):
-        self.frames.append(frame)
-
-    def get_full_audio(self) -> bytes:
-        return b"".join([frame.data for frame in self.frames])
-
-
-# 转录服务类
-class TranscriptionService:
-
-    def __init__(self):
-        pass
-
-    def transcribe(self, context: TranscriptionContext):
-        full_audio = context.get_full_audio()
-        return transcribe_full(full_audio)
-
-
-# 创建转录服务的依赖项
-def get_transcription_service() -> TranscriptionService:
-    return TranscriptionService()
 
 
 # WebSocket端点
