@@ -1,15 +1,17 @@
 from functools import wraps
-from typing import Dict, Callable
+from typing import Dict, Callable, TypeVar, cast
+
+T = TypeVar("T")
 
 
-def singleton(class_: Callable) -> Callable:
+def singleton(class_: Callable[..., T]) -> Callable[..., T]:
     """Singleton decorator"""
     instances: Dict = {}
 
     @wraps(class_)
-    def wrapper(*args, **kwargs):
+    def wrapper(*args, **kwargs) -> T:
         if class_ not in instances:
             instances[class_] = class_(*args, **kwargs)
-        return instances[class_]
+        return cast(T, instances[class_])
 
     return wrapper
