@@ -8,7 +8,7 @@ app = FastAPI()
 
 
 # 音频配置类
-class AudioConfiguration:
+class AudioConstants:
     SAMPLE_RATE = 16000
     BIT = 16
 
@@ -16,9 +16,11 @@ class AudioConfiguration:
 # 音频帧类
 class AudioFrame:
 
-    def __init__(self, data: bytes, config: AudioConfiguration):
+    def __init__(self, data: bytes):
         self.data = data
-        self.duration_seconds = len(data) / (config.SAMPLE_RATE * config.BIT / 8)
+        self.duration_seconds = len(data) / (
+            AudioConstants.SAMPLE_RATE * AudioConstants.BIT / 8
+        )
 
 
 # 转录上下文类
@@ -37,8 +39,8 @@ class TranscriptionContext:
 # 转录服务类
 class TranscriptionService:
 
-    def __init__(self, config: AudioConfiguration):
-        self.config = config
+    def __init__(self):
+        pass
 
     def transcribe(self, context: TranscriptionContext):
         full_audio = context.get_full_audio()
@@ -47,7 +49,7 @@ class TranscriptionService:
 
 # 创建转录服务的依赖项
 def get_transcription_service() -> TranscriptionService:
-    return TranscriptionService(AudioConfiguration())
+    return TranscriptionService()
 
 
 # WebSocket端点
@@ -61,11 +63,10 @@ async def audio_endpoint(
     await ws.accept()
 
     context = TranscriptionContext()
-    config = AudioConfiguration()
     try:
         while True:
             audio_data = await ws.receive_bytes()
-            frame = AudioFrame(audio_data, config)
+            frame = AudioFrame(audio_data)
             context.add_frame(frame)
             logger.debug(
                 f"Received audio data, duration: {frame.duration_seconds:.2f} s"
