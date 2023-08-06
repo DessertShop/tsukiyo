@@ -21,6 +21,8 @@ pre-commit = "^3.3.3"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.0"
+httpx = "^0.24.1"
+
 
 [build-system]
 requires = ["poetry-core"]
