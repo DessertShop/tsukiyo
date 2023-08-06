@@ -1,7 +1,12 @@
+import re
+from contextlib import contextmanager
 from unittest.mock import patch
+
 from fastapi.testclient import TestClient
+from loguru import logger
+
 from src.main import (
-    AudioConfiguration,
+    AudioConstants,
     AudioFrame,
     TranscriptionContext,
     TranscriptionService,
@@ -9,26 +14,24 @@ from src.main import (
 )
 
 
-def create_test_audio_data(config):
-    return bytes([0] * (config.SAMPLE_RATE * config.BIT // 8))
+def create_test_audio_data():
+    return bytes([0] * (AudioConstants.SAMPLE_RATE * AudioConstants.BIT // 8))
 
 
 # AudioFrame Class Tests
 def test_audio_frame():
     """测试 AudioFrame 类的持续时间是否正确计算"""
-    config = AudioConfiguration()
-    data = create_test_audio_data(config)
-    frame = AudioFrame(data, config)
+    data = create_test_audio_data()
+    frame = AudioFrame(data)
     assert frame.duration_seconds == 1.0
 
 
 # TranscriptionContext Class Tests
 def test_transcription_context():
     """测试 TranscriptionContext 类是否正确添加和获取音频帧"""
-    config = AudioConfiguration()
     context = TranscriptionContext()
-    data = create_test_audio_data(config)
-    frame = AudioFrame(data, config)
+    data = create_test_audio_data()
+    frame = AudioFrame(data)
     context.add_frame(frame)
     assert context.get_full_audio() == data
 
@@ -38,21 +41,13 @@ def test_transcription_context():
 def test_transcription_service(mock_transcribe_full):
     """测试 TranscriptionService 类是否正确调用转录功能并返回转录内容"""
     mock_transcribe_full.return_value = "Test transcription"
-    config = AudioConfiguration()
     context = TranscriptionContext()
-    data = create_test_audio_data(config)
-    frame = AudioFrame(data, config)
+    data = create_test_audio_data()
+    frame = AudioFrame(data)
     context.add_frame(frame)
-    service = TranscriptionService(config)
+    service = TranscriptionService()
     transcription = service.transcribe(context)
     assert transcription == "Test transcription"
-
-
-from loguru import logger
-from unittest.mock import patch
-import re
-
-from contextlib import contextmanager
 
 
 @contextmanager
