@@ -30,8 +30,8 @@ async def audio_endpoint(
             )
 
     except WebSocketDisconnect:
-        transcription = transcription_service.transcribe(context)
-        logger.info(f"Transcription complete: {transcription}")
+        transcription = transcription_service.transcribe_context(context)
+        logger.info(f"Transcription complete: {transcription.text}")
 
     except Exception as e:
         logger.error(f"Unexpected error: {e}")
