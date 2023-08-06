@@ -1,5 +1,6 @@
 # 转录服务类
-from src.audio.whisper.transcribe import TranscriptionContext, transcribe_full
+from src.audio.whisper.context import TranscriptionContext
+from src.audio.whisper.transcribe import transcribe_full
 
 
 class TranscriptionService:

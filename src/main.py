@@ -3,7 +3,7 @@ from loguru import logger
 
 from src.audio import AudioFrame
 from src.audio.whisper.server import TranscriptionService, get_transcription_service
-from src.audio.whisper.transcribe import TranscriptionContext
+from src.audio.whisper.context import TranscriptionContext
 
 # 创建应用实例
 app = FastAPI()

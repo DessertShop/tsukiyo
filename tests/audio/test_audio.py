@@ -1,9 +1,9 @@
 from unittest.mock import patch
 
 from src.audio import AudioConstants
+from src.audio.whisper.context import TranscriptionContext
 from src.main import (
     AudioFrame,
-    TranscriptionContext,
     TranscriptionService,
 )
 
